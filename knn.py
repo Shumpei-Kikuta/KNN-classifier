@@ -29,10 +29,10 @@ def calculate_similar_vector(vector: np.ndarray, train_X: pd.DataFrame, train_Y:
     
 
 def main(train_X: pd.DataFrame, test_X: pd.DataFrame, train_Y: np.ndarray, K: int) -> np.ndarray:
-    test_size = test_X.shape[0]
+    # 形を整える
     train_X = train_X.reset_index()
     test_X = test_X.reset_index()
-    # each_sim_df = pd.DataFrame(columns=["node"])
+    test_size = test_X.shape[0]
     each_sim_lists = []
     for i in range(test_size):
         node = test_X["index"].iloc[i]
@@ -48,8 +48,8 @@ def main(train_X: pd.DataFrame, test_X: pd.DataFrame, train_Y: np.ndarray, K: in
                     max_key = key_
                     max_num = value_
         each_sim_lists.append(max_key)
-        print("node: ", node, " label: ", max_key)
-    print(each_sim_lists)
+        # print("node: ", node, " label: ", max_key)
+    # print(each_sim_lists)
     return np.array(each_sim_lists)
 
 
@@ -66,7 +66,5 @@ if __name__ == '__main__':
 
     # import pdb; pdb.set_trace()
     train_X, test_X, train_Y, test_Y = train_test_split(X, Y, test_size=0.3, random_state=0)
-    train_X = train_X.reset_index()
-    test_X = test_X.reset_index()
     k = 1
     main(train_X, test_X, train_Y, k)
