@@ -3,7 +3,7 @@ import pandas as pd
 import argparse
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
-from knn import calculate_similar_vector
+from knn import calculate_similar_vector, main
 from collections import Counter
 
 iris = load_iris()
@@ -54,6 +54,11 @@ def test_calculate_similar_vector_value2():
                 max_num = value_
 
     assert(max_key == test_Y[test_X["index"] == idx][0])
+
+def test_main_shape():
+    K = 10
+    assert(main(train_X, test_X, train_Y, K).shape == test_Y.shape)
+    
 
 if __name__ == '__main__':
     test_calculate_similar_vector_value1()
