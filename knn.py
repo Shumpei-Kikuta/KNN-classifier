@@ -12,7 +12,7 @@ input:
     train_Y: pd.DataFrame(N1, 1)
     k: int
 output:
-    test_label: np.ndarrray(N2, k)
+    pred_Y: np.ndarrray(N2, k)
 """
 
 def calculate_similar_vector(vector: np.ndarray, train_X: pd.DataFrame, train_Y: np.ndarray,  K: int) -> np.ndarray:
@@ -33,7 +33,7 @@ def main(train_X: pd.DataFrame, test_X: pd.DataFrame, train_Y: np.ndarray, K: in
     train_X = train_X.reset_index()
     test_X = test_X.reset_index()
     test_size = test_X.shape[0]
-    each_sim_lists = []
+    pred_Y = []
     for i in range(test_size):
         node = test_X["index"].iloc[i]
         vector = test_X[test_X["index"] == node].values[0, 1:]
@@ -47,10 +47,8 @@ def main(train_X: pd.DataFrame, test_X: pd.DataFrame, train_Y: np.ndarray, K: in
                 if max_num <= value_:
                     max_key = key_
                     max_num = value_
-        each_sim_lists.append(max_key)
-        # print("node: ", node, " label: ", max_key)
-    # print(each_sim_lists)
-    return np.array(each_sim_lists)
+        pred_Y.append(max_key)
+    return np.array(pred_Y)
 
 
 
