@@ -59,6 +59,15 @@ def test_main_shape():
     K = 10
     assert(main(train_X, test_X, train_Y, K).shape == test_Y.shape)
     
+def test_main_value():
+    K = 3
+    rate = np.sum(main(train_X, test_X, train_Y, K) == test_Y) / test_Y.shape[0]
+    assert(rate > 0.9)
+
+def test_main_value2():
+    K = 3
+    rate = np.sum(main(train_X, test_X, train_Y, K) == test_Y) / test_Y.shape[0]
+    assert(rate < 1)
 
 if __name__ == '__main__':
     test_calculate_similar_vector_value1()
